@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /**
  * Created by Wadim on 16.06.2017.
@@ -95,13 +97,28 @@ public class BarcodesActivity extends AppCompatActivity {
         }
         return global;
     }
+    public void overWrite(){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < names.length; i++) {
+            stringBuilder.append("><" + names[i] + "><" + date[i] + "><" +  type[i] + "><" + code[i] + "><" + com[i]+"><");
+        }
+        Toast.makeText(BarcodesActivity.this, stringBuilder.toString(), Toast.LENGTH_SHORT).show();
+        try {
+            FileOutputStream fileOutputStream = openFileOutput(namePositon, MODE_PRIVATE);
+            fileOutputStream.write(stringBuilder.toString().getBytes());
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            Toast.makeText(BarcodesActivity.this, "Error", Toast.LENGTH_SHORT).show();}
+
+    }
     public  void onClick(View view){
         Intent intent = new Intent(BarcodesActivity.this,CreateBarcodeActivity.class);
         intent.putExtra("name", namePositon);
         startActivity(intent);
 
     }
-    public void editItem(int position){
+    public void editItem(final int position){
         nameE = new EditText(BarcodesActivity.this);
         dateE = new EditText(BarcodesActivity.this);
         typeE = new EditText(BarcodesActivity.this);
@@ -132,14 +149,19 @@ public class BarcodesActivity extends AppCompatActivity {
                 type[position] = typeE.getText().toString();
                 code[position] = codeE.getText().toString();
                 com[position] = comE.getText().toString();
+                overWrite();
+                recreate();
+            }
+        });
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
             }
         });
         builder.show();
-
-
-
-        recreate();
     }
+
 }
 
 
