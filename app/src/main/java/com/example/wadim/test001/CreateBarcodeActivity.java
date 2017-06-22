@@ -88,7 +88,7 @@ public class CreateBarcodeActivity extends AppCompatActivity {
     public String getTime(){
         long date = System.currentTimeMillis();
 
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd MMM  , yyyy h:mm a");
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd MMM , yyyy h:mm a");
         String dateString = sdf.format(date);
         return dateString;
     }

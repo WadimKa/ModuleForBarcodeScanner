@@ -14,9 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 
 /**
  * Created by Wadim on 16.06.2017.
@@ -52,6 +54,7 @@ public class BarcodesActivity extends AppCompatActivity {
 
     public void readList(){
         try {
+            /*старый код, не поддерживал utf8.новый проще
             int available =0;
             FileInputStream stream = openFileInput(namePositon);
             available=stream.available();
@@ -64,7 +67,14 @@ public class BarcodesActivity extends AppCompatActivity {
                 stringBuilder.append((char)buffer[i]);
             }
             String bubble=String.valueOf(stringBuilder);
-            arrForList=bubble.split("><");
+            arrForList=bubble.split("><");*/
+            BufferedReader br = new BufferedReader(new InputStreamReader(openFileInput(namePositon), "utf8"));
+            String line="";
+            StringBuilder builder = new StringBuilder("");
+            while((line=br.readLine())!=null){
+                builder.append(line);
+            }
+            arrForList=new String(String.valueOf(builder)).split("><");
 
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "File not Found", Toast.LENGTH_SHORT).show();
@@ -93,7 +103,7 @@ public class BarcodesActivity extends AppCompatActivity {
         String[] global = new String[names.length];
 
         for (int i = 0; i<names.length;i++){
-            global[i]="Name-"+names[i]+" - "+date[i]+"\n"+"Barcode-"+type[i]+"-"+code[i]+"\n"+com[i];
+            global[i]=" "+names[i]+"\n Date - "+date[i]+"\n"+" Type - "+type[i]+"\n Barcode - "+code[i]+"\n ("+com[i]+")";
         }
         return global;
     }
