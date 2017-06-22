@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
     void onClick(View view){
         showAlertDialogCreate();
@@ -77,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         editText=new EditText(MainActivity.this);
         AlertDialog.Builder dial = new AlertDialog.Builder(MainActivity.this);
         dial.setTitle("Create new group");
-        dial.setMessage("\n"+"Name the group");
+        editText.setHint("Name");
         dial.setView(editText);
         dial.setPositiveButton("Create", new DialogInterface.OnClickListener() {
             @Override
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.rename : renameGroup(arr[contextMenuInfo.position]);
                 break;
         }
-        recreate();
+
         return super.onContextItemSelected(item);
     }
 
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                renameFile(name, editText.getText().toString());
+                renameFile(name, edtForRename.getText().toString());
             }
         });
         builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
@@ -138,16 +136,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("asd");
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void renameFile(String oldName, String newName) {
         File oldFile = new File(getApplicationInfo().dataDir+"/files/"+oldName);
         File newFile = new File(getApplicationInfo().dataDir+"/files/"+newName);
         oldFile.renameTo(newFile);
+        recreate();
     }
 
     private void deleteGroup(String name) {
         try {
             File file = new File(getApplicationInfo().dataDir+"/files/"+name);
             file.delete();
+            recreate();
         } catch (Exception e) {
             e.printStackTrace();
         }
