@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,13 +17,15 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="comment"
+        android:text=""
+        android:hint="Comment"
         android:id="@+id/edtComment" />
     <EditText
         android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="name" />
+        android:text=""
+        android:hint="Name"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

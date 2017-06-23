@@ -40,6 +40,8 @@ public class CreateBarcodeActivity extends AppCompatActivity {
     public void onClick(View v) {
         IntentIntegrator scanIntegrator = new IntentIntegrator(this);
         scanIntegrator.initiateScan();
+        nameCode.setText("");
+        comment.setText("");
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
@@ -82,7 +84,13 @@ public class CreateBarcodeActivity extends AppCompatActivity {
         }
     }
     public String createDataString(){
-        String data ="><"+nameCode.getText().toString()+"><"+getTime()+"><"+formatTxt.getText().toString()+"><"+contentTxt.getText().toString()+"><"+comment.getText().toString()+"><";
+        String data="";
+        if(comment.getText().toString().equals("")) {
+            data = "><" + nameCode.getText().toString() + "><" + getTime() + "><" + formatTxt.getText().toString() + "><" + contentTxt.getText().toString() + "><" + " - " + "><";
+        }else{
+            data = "><" + nameCode.getText().toString() + "><" + getTime() + "><" + formatTxt.getText().toString() + "><" + contentTxt.getText().toString() + "><" + comment.getText().toString() + "><";
+
+        }
         return data;
     }
     public String getTime(){

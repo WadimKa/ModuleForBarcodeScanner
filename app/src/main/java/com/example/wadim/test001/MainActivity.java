@@ -136,12 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add("asd");
-        return super.onCreateOptionsMenu(menu);
-    }
-
     private void renameFile(String oldName, String newName) {
         File oldFile = new File(getApplicationInfo().dataDir+"/files/"+oldName);
         File newFile = new File(getApplicationInfo().dataDir+"/files/"+newName);
