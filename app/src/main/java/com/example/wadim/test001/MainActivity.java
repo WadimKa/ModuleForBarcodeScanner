@@ -36,13 +36,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_lat);
         listView = (ListView) findViewById(R.id.listOfGroup);
         registerForContextMenu(listView);
+        setTitle("  Groups");
         try {
             FileOutputStream fileOutputStream = openFileOutput("File2", MODE_PRIVATE);
             deleteFile("File2");
             File file = new File(getApplicationInfo().dataDir+"/files");
             arr = file.list();
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Name can`t be empty", Toast.LENGTH_LONG).show();
         }
 
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    void onClick(View view){
+    public void onClickAlert(View view){
         showAlertDialogCreate();
     }
     void createNewGroup(String name){

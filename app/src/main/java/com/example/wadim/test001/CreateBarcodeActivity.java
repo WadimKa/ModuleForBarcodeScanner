@@ -22,14 +22,16 @@ public class CreateBarcodeActivity extends AppCompatActivity {
     private TextView formatTxt, contentTxt;
     EditText nameCode, comment;
     String nameGroup="";
+    Button scan;
 
     @Override
-
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_barcodes_lat);
-        setTitle("Новый штрих-код");
+        setTitle("  Create new barcode");
         nameGroup = getIntent().getExtras().getString("name");
+        scan = (Button) findViewById(R.id.btnScan);
+
 
         formatTxt = (TextView) findViewById(R.id.tvType);
         contentTxt = (TextView) findViewById(R.id.tvCode);
@@ -55,8 +57,8 @@ public class CreateBarcodeActivity extends AppCompatActivity {
             // we have a result
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
-            formatTxt.setText(scanFormat);
-            contentTxt.setText(scanContent);
+            formatTxt.setText("Code type : "+scanFormat);
+            contentTxt.setText("Barcode : "+scanContent);
 
         } else {
             Toast toast = Toast.makeText(getApplicationContext(),
@@ -64,23 +66,21 @@ public class CreateBarcodeActivity extends AppCompatActivity {
             toast.show();
         }
     }
-    public void onClickSecond(View v) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, createDataString());
-        startActivity(intent);
-    }
 
     public void onClickSave(View view) {
-        try {
-            Toast.makeText(getApplicationContext(), createDataString(), Toast.LENGTH_SHORT).show();
+        if(formatTxt.getText().toString().equals("")){
+            Toast.makeText(CreateBarcodeActivity.this, "First scan the barcode", Toast.LENGTH_SHORT).show();
+        }else {
+            try {
+                Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
 
-             FileOutputStream fileOutputStream = openFileOutput(nameGroup, MODE_APPEND);
-             fileOutputStream.write(createDataString().getBytes());
-             fileOutputStream.flush();
-             fileOutputStream.close();
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                FileOutputStream fileOutputStream = openFileOutput(nameGroup, MODE_APPEND);
+                fileOutputStream.write(createDataString().getBytes());
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+            }
         }
     }
     public String createDataString(){

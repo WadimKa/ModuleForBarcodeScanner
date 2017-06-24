@@ -87,8 +87,8 @@ public class BarcodesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.barcodes_lat);
         namePositon = getIntent().getExtras().getString("name");
-        setTitle(getString(R.string.TitleForGroupLat)+" #"+namePositon+"#");
-
+        //setTitle(getString(R.string.TitleForGroupLat)+" #"+namePositon+"#");
+        setTitle("  Group \""+namePositon+"\"");
         readList();
         packArrays();
         charSequenceArrayAdapter = new ArrayAdapter<CharSequence>(getApplicationContext(), R.layout.test, createGlobalArray());
