@@ -10,44 +10,39 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/tvType"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="28dp"
         android:layout_below="@+id/imageView2"
-        android:layout_alignLeft="@+id/edtName"
-        android:layout_alignStart="@+id/edtName" />
+        android:layout_centerHorizontal="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/tvCode"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="30dp"
         android:layout_below="@+id/tvType"
-        android:layout_alignLeft="@+id/tvType"
-        android:layout_alignStart="@+id/tvType" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
         android:hint="Comment"
         android:id="@+id/edtComment"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_below="@+id/edtName"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="26dp" />
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_centerHorizontal="true" />
     <EditText
         android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
         android:hint="Name"
-        android:layout_marginTop="41dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_below="@+id/tvCode"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginBottom="26dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/edtComment"
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -57,7 +52,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout2">
 
         <Button
             android:id="@+id/btnSave"
@@ -94,7 +90,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="160dp"
         app:srcCompat="@drawable/barcode_scan"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

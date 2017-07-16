@@ -1,7 +1,6 @@
 package com.example.wadim.test001;
 
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
+import com.example.wadim.test001.package_for_import.IntentIntegrator;
+import com.example.wadim.test001.package_for_import.IntentResult;
+
 import java.io.FileOutputStream;
 
 /**

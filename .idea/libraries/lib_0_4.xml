@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="lib-0.4">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/2337406835f9904875a91f93f2ce89820beb3961/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/2337406835f9904875a91f93f2ce89820beb3961/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.bettervectordrawable/lib/0.4/47666f320321eded93e698f71bad26c6725ffc12/lib-0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

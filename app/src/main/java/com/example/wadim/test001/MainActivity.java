@@ -2,12 +2,10 @@ package com.example.wadim.test001;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +16,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     String[] arr;
     EditText editText, edtForRename;
     ArrayList<String> arrayList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,29 +36,31 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileOutputStream fileOutputStream = openFileOutput("File2", MODE_PRIVATE);
             deleteFile("File2");
-            File file = new File(getApplicationInfo().dataDir+"/files");
+            File file = new File(getApplicationInfo().dataDir + "/files");
             arr = file.list();
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Name can`t be empty", Toast.LENGTH_LONG).show();
         }
 
 
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getApplicationContext(),R.layout.iteam_of_list, arr);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getApplicationContext(), R.layout.iteam_of_list_of_group, R.id.tvFromGroup, arr);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent intent = new Intent(getApplicationContext(), BarcodesActivity.class);
-                    intent.putExtra("name", arr[i]);
-                    startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), BarcodesActivity.class);
+                intent.putExtra("name", arr[i]);
+                startActivity(intent);
             }
         });
 
     }
-    public void onClickAlert(View view){
+
+    public void onClickAlert(View view) {
         showAlertDialogCreate();
     }
-    void createNewGroup(String name){
+
+    void createNewGroup(String name) {
         try {
             FileOutputStream fileOutputStream = openFileOutput(name, MODE_APPEND);
             fileOutputStream.flush();
@@ -72,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-     void showAlertDialogCreate() {
-        editText=new EditText(MainActivity.this);
+    void showAlertDialogCreate() {
+        editText = new EditText(MainActivity.this);
         AlertDialog.Builder dial = new AlertDialog.Builder(MainActivity.this);
         dial.setTitle("Create new group");
         editText.setHint("Name");
@@ -105,10 +103,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo contextMenuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()){
-            case R.id.delete : deleteGroup(arr[contextMenuInfo.position]);
+        switch (item.getItemId()) {
+            case R.id.delete:
+                deleteGroup(arr[contextMenuInfo.position]);
                 break;
-            case R.id.rename : renameGroup(arr[contextMenuInfo.position]);
+            case R.id.rename:
+                renameGroup(arr[contextMenuInfo.position]);
                 break;
         }
 
@@ -138,15 +138,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void renameFile(String oldName, String newName) {
-        File oldFile = new File(getApplicationInfo().dataDir+"/files/"+oldName);
-        File newFile = new File(getApplicationInfo().dataDir+"/files/"+newName);
+        File oldFile = new File(getApplicationInfo().dataDir + "/files/" + oldName);
+        File newFile = new File(getApplicationInfo().dataDir + "/files/" + newName);
         oldFile.renameTo(newFile);
         recreate();
     }
 
     private void deleteGroup(String name) {
         try {
-            File file = new File(getApplicationInfo().dataDir+"/files/"+name);
+            File file = new File(getApplicationInfo().dataDir + "/files/" + name);
             file.delete();
             recreate();
         } catch (Exception e) {

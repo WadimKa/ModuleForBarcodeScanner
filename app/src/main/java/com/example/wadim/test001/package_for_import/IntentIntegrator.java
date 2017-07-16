@@ -1,4 +1,4 @@
-package com.example.wadim.test001;
+package com.example.wadim.test001.package_for_import;
 
 
 /*

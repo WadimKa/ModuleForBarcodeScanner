@@ -13,4 +13,6 @@
     android:paddingRight="20dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
+    android:drawableLeft="@drawable/vector_for_list_of_barcodes"
+    android:drawablePadding="20dp"
     android:background="@drawable/rectangle"/>

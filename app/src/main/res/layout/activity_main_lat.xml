@@ -28,6 +28,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
         app:fabSize="normal"
-        app:srcCompat="@drawable/book_plus"
+        android:src="@drawable/book_plus"
         android:onClick="onClickAlert"/>
 </FrameLayout>
