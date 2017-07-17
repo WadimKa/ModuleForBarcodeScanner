@@ -8,14 +8,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -89,7 +92,7 @@ public class BarcodesActivity extends AppCompatActivity {
         setTitle("  Group \"" + namePositon + "\"");
         readList();
         packArrays();
-        charSequenceArrayAdapter = new ArrayAdapter<CharSequence>(getApplicationContext(), R.layout.test,  createGlobalArray());
+        charSequenceArrayAdapter = new ArrayAdapter<CharSequence>(getApplicationContext(), R.layout.test, createGlobalArray());
         listView = (ListView) findViewById(R.id.listOfCodes);
         listView.setAdapter(charSequenceArrayAdapter);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -209,6 +212,14 @@ public class BarcodesActivity extends AppCompatActivity {
     }
 
     public void editItem(final int position) {
+        TextView title;
+
+        title = new TextView(BarcodesActivity.this);
+        title.setText("Edit the barcode");
+        title.setGravity(1);
+        title.setTextSize(20);
+        title.setTextColor(getResources().getColor(R.color.titleColor));
+
         nameE = new EditText(BarcodesActivity.this);
         dateE = new EditText(BarcodesActivity.this);
         typeE = new EditText(BarcodesActivity.this);
@@ -220,8 +231,12 @@ public class BarcodesActivity extends AppCompatActivity {
         comE.setText(com[position]);
         nameE.setText(names[position]);
 
+        nameE.setPadding(10,80,0,30);
+
+
         LinearLayout layout = new LinearLayout(BarcodesActivity.this);
         layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(title);
         layout.addView(nameE);
         layout.addView(dateE);
         layout.addView(typeE);
@@ -230,7 +245,6 @@ public class BarcodesActivity extends AppCompatActivity {
         layout.setPadding(30, 0, 30, 0);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(BarcodesActivity.this);
-        builder.setTitle("       Edit barcode");
         builder.setView(layout);
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
@@ -244,6 +258,43 @@ public class BarcodesActivity extends AppCompatActivity {
                 recreate();
             }
         });
+
+        builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String[] bublenames = new String[names.length-1];
+                String[] bubledate = new String[names.length-1];
+                String[] bubletype = new String[names.length-1];
+                String[] bublecode = new String[names.length-1];
+                String[] bublecom = new String[names.length-1];
+
+                System.arraycopy(names, 0, bublenames, 0, position);
+                System.arraycopy(names, position + 1, bublenames, position, names.length - position - 1);
+                System.arraycopy(date, 0, bubledate, 0, position);
+                System.arraycopy(date, position + 1, bubledate, position, date.length - position - 1);
+                System.arraycopy(type, 0, bubletype, 0, position);
+                System.arraycopy(type, position + 1, bubletype, position, type.length - position - 1);
+                System.arraycopy(code, 0, bublecode, 0, position);
+                System.arraycopy(code, position + 1, bublecode, position, code.length - position - 1);
+                System.arraycopy(com, 0, bublecom, 0, position);
+                System.arraycopy(com, position + 1, bublecom, position, com.length - position - 1);
+
+                names = null;
+                date = null;
+                type = null;
+                code = null;
+                com = null;
+
+                names = bublenames;
+                date = bubledate;
+                type = bubletype;
+                code = bublecode;
+                com = bublecom;
+
+                overWrite();
+                recreate();
+            }
+        });
         builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -252,7 +303,6 @@ public class BarcodesActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
 }
 
 
